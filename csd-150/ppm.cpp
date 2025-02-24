@@ -1,20 +1,18 @@
-// SPDX-License-Identifier: GPL-3.0-only
 /*
  *  uoc/csd-150/ppm.cpp
  *
  *  Copyright (C) 2025, infdv <infdv.me@gmail.com>
  */
-/*
- * Ello, I couldnt find the libraries and stuff so I just made it from scratch
- * hope there is no problem with that
- */
 
+#include <algorithm>  // includes std::min() for the nested
+#include <fstream>    // For file I/O
 #include <iostream>
-#include <fstream>
-#include <vector>
-#include <algorithm>
+#include <vector>  // library to use vectors. Technically can be done with arrays since oly 2 colours are needed.
 
-int getValidInt(const std::string& prompt, int min, int max) {
+#include "color.h"
+#include "vec3.h"
+
+int getValidInt(const std::string &prompt, int min, int max) {
   int value;
   while (true) {
     std::cout << prompt;
@@ -45,16 +43,16 @@ void generatePPM(int width, int height, std::vector<int> color1, std::vector<int
       bool useColor1 = false;
 
       switch (pattern) {
-        case 1: // Horizontal lines
+        case 1:  // Horizontal lines
           useColor1 = (y / size) % 2 == 0;
           break;
-        case 2: // Vertical lines
+        case 2:  // Vertical lines
           useColor1 = (x / size) % 2 == 0;
           break;
-        case 3: // Checkerboard
+        case 3:  // Checkerboard
           useColor1 = ((x / size) % 2) == ((y / size) % 2);
           break;
-        case 4: // Nested squares (credits to google & gpt for the math)
+        case 4:  // Nested squares (credits to google & gpt for the math)
           int minDist = std::min({x, y, width - x - 1, height - y - 1});
           useColor1 = (minDist / size) % 2 == 0;
           break;
@@ -82,12 +80,11 @@ int main() {
   std::cout << "Enter Color2 (R G B) (0-255): ";
   for (int &c : color2) c = getValidInt("", 0, 255);
 
-  std::cout
-    << "Select a pattern:\n"
-    << "1 - Horizontal Lines\n"
-    << "2 - Vertical Lines\n"
-    << "3 - Checkerboard\n"
-    << "4 - Nested Squares\n";
+  std::cout << "Select a pattern:\n"
+            << "1 - Horizontal Lines\n"
+            << "2 - Vertical Lines\n"
+            << "3 - Checkerboard\n"
+            << "4 - Nested Squares\n";
 
   int pattern = getValidInt("Enter pattern (1-4): ", 1, 4);
   int size = getValidInt("Enter pattern size: ", 1, std::min(width, height));
@@ -96,3 +93,4 @@ int main() {
 
   return 0;
 }
+ 
