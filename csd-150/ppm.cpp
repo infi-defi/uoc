@@ -9,8 +9,8 @@
 #include <iostream>
 #include <vector>  // library to use vectors. Technically can be done with arrays since oly 2 colours are needed.
 
-#include "color.h"
-#include "vec3.h"
+// #include "color.h"
+// #include "vec3.h"
 
 int getValidInt(const std::string &prompt, int min, int max) {
   int value;
