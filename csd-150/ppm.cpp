@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0-only
 /*
- *  csd-150/ppm.cpp
+ *  uoc/csd-150/ppm.cpp
  *
  *  Copyright (C) 2025, infdv <infdv.me@gmail.com>
  */
